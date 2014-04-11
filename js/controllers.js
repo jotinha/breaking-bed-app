@@ -7,17 +7,12 @@ angular.module('starter.controllers', [])
   $scope.friends = Friends.all();
 })
 
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
-})
-
 .controller('AccountCtrl', function($scope) {
 })
 
-.controller('PromosCtrl', function($scope,$firebase) {
-  var dataRef = new Firebase("https://lastminute.firebaseio.com");
+.controller('PromosCtrl', function($scope,$firebase,Data) {
 
-  $scope.promos = $firebase(dataRef);
+  $scope.promos = Data.getPromos();
 
   $scope.debugme = function() {
     $scope.hello = 1;
@@ -33,4 +28,10 @@ angular.module('starter.controllers', [])
     return n;
   }
 
-});
+})
+
+.controller('PromoDetailCtrl', function($scope, $stateParams, Data) {
+  $scope.promo = Data.getPromo($stateParams.promoId);
+
+})
+

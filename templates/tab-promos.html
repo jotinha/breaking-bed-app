@@ -2,7 +2,7 @@
   <ion-content class="has-header">
     <ion-list>
       <div ng-repeat="(id,promo) in promos" type="item-text-wrap"> 
-        <ion-item ng-repeat="offer in promo.offers" type="item-text-wrap" href="#/tab/promo/{{promo.id}}">
+        <ion-item ng-repeat="(key,offer) in promo.offers" type="item-text-wrap" href="#/tab/promo/{{id}}">
           {{promo.name}}: {{offer.desc}} , {{offer.price}}
         </ion-item>
       </div>

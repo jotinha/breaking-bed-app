@@ -1,9 +1,13 @@
-<ion-view title="Map">
+<ion-view title="Mapa">
+  <ion-nav-buttons side="right">
+    <a class="button button-icon ion-clipboard" ng-click="centerOnMe()"></a>
+  </ion-nav-buttons>
+
   <ion-content scroll="false">
       <!-- <div id="map"></div> -->
     <google-map id="map" center="map.center" zoom="map.zoom"
-      draggable="true" resize>
-
+      draggable="true">
+      <marker ng-if="map.myposition" coords="map.myposition"></marker>
     </google-map>
 
   </ion-content>

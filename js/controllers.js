@@ -1,13 +1,18 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope,$ionicLoading) {
-  $scope.map = {
-      center: {
-          latitude: 45,
-          longitude: -73
-      },
-      zoom: 8
-  };
+.controller('MapCtrl', function($scope,Map) {
+
+  $scope.map = Map;
+
+  $scope.centerOnMe = function() {
+    $scope.map.center.latitude = $scope.map.myposition.latitude;
+    $scope.map.center.longitude = $scope.map.myposition.longitude;
+  }
+  //$scope.$watch(Map,function() { $scope.map = Map; }, true);
+
+  //$scope.$on('locationChanged',$scope.updateCenter);
+  
+  // $scope.updateCenter();
   // function initialize() {
   //   var mapOptions = {
   //     center: new google.maps.LatLng(43.07493,-89.381388),
@@ -78,6 +83,10 @@ angular.module('starter.controllers', [])
 
 .controller('PromoDetailCtrl', function($scope, $stateParams, Data) {
   $scope.promo = Data.getPromo($stateParams.promoId);
+
+})
+
+.controller('HomeCtrl',function($scope) {
 
 })
 

@@ -9,21 +9,19 @@ DEBUG = true;
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','firebase','google-maps'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$ionicLoading,$rootScope) {
   $ionicPlatform.ready(function() {
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
+
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
 
     // setup an abstract state for the tabs directive
@@ -66,12 +64,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     })
 
 
-    .state('tab.account', {
-      url: '/account',
+    .state('tab.home', {
+      url: '/home',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-home': {
+          templateUrl: 'templates/tab-home.html',
+          controller: 'HomeCtrl'
         }
       }
     });
@@ -81,78 +79,4 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
 
 })
 
-.service('Data', function($firebase) {
 
-  if (!DEBUG) {
-    var dataUrl = "https://lastminute.firebaseio.com/";
-    var dataRef = new Firebase(dataUrl);
-    var promos = $firebase(dataRef);
-
-
-    return {
-
-      getPromos: function() {
-        return promos;
-      },
-
-      getOffer: function(promoId,offerId) {
-        return promos.$child(promoId + '/' + offerId);
-      },
-
-      getPromo: function(promoId) {
-        return promos.$child(promoId);
-      }
-
-    };
-  } else {
-
-    var promos = {
-        "2133" : {
-          "offers" : {
-            "-JKGiwDEeUgfLMJfy7Db" : {
-              "price" : "10€",
-              "type" : "room",
-              "room" : "bunk bed",
-              "desc" : "Quarto com vista para a ria de Aveiro 2"
-            },
-            "-JKGb3jLHze_L4EN_-QL" : {
-              "price" : "20€",
-              "discount" : "99%",
-              "room" : "Duplo",
-              "desc" : "Quarto com vista para a praia da barra"
-            },
-            "-JKHZaHmNym_Oeu8fOZQ" : {
-              "price" : "Caro",
-              "discount" : "80 porcento",
-              "type" : "room",
-              "room" : "Duplo",
-              "imgs" : [ "teste" ],
-              "desc" : "Quarto Bonito e Bom"
-            }
-          },
-          "location" : {
-            "latitude" : 41.75373,
-            "longitude" : -8.09017
-          },
-          "name" : "Hotel 1"
-        }
-      }
-
-    return {
-
-      getPromos: function() {
-        return promos;
-      },
-
-      getOffer: function(promoId,offerId) {
-        return promos[promoId][offerId];
-      },
-
-      getPromo: function(promoId) {
-        return promos[promoId];
-      }
- 
-    };
-  }
-
-})

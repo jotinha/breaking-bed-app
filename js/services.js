@@ -27,6 +27,10 @@ angular.module('starter.services', [])
         return promos.$child(promoId);
       }
 
+      updateDistances: function() {
+        
+      }
+
     };
   } else {
 
@@ -131,4 +135,20 @@ angular.module('starter.services', [])
 
   return m;
     
+})
+
+.service('Filter', function() {
+
+  var f = {
+    radius: 10,
+    room: 'duplo',
+    roomOptions: [],
+    price : {
+      max: 9999,
+      min: 0
+    }
+  }
+
+  return f;
+
 })

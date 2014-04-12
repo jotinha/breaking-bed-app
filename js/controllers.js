@@ -35,8 +35,53 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl',function($scope,Filter) {
+.controller('HomeCtrl',function($scope,$ionicModal,Filter) {
   $scope.filter = Filter;
+  
+  $scope.bedtypeOptions = ['bunk','single','double','twin','triple'];
+
+  $ionicModal.fromTemplateUrl('templates/modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+
+
+  $scope.openOptions = function(type) {
+    $scope.option = type;
+    $scope.openModal();
+  } 
+
+  $scope.setValue = function(val) {
+    $scope.filter[$scope.optVar] = val;
+    $scope.closeModal();
+  }
+
+  $scope.$watch('filter.bedtype', function() {
+    $scope.closeModal();  /*hack*/
+  });
+
 
 })
+
+// .controller('ModalCtrl', function($scope) {
+
+//   $scope.val = $scope.filter[$scope.optVar];
+
+//   $scope.$watch($scope.optVar,function() {
+//     $scope.val = $scope.filter[$scope.optVar];
+//   });
+
+// })
 

@@ -1,10 +1,11 @@
-<ion-view title="Início">
+<ion-view title="Home">
   <ion-content class="has-header padding">
-    <p> Eu procuro um </p>
-    <p> quarto <input type="text" ng-model="filter.room"></p>
-    <p>num raio de</p>
-    <p><input type="number" ng-model="filter.radius">km</p>
-    <p>até <input type="number" ng-model="filter.price.max">€</p>
+    <p> I'm looking for </p>
+    <p><button class="button" ng-click="openOptions('number')">{{filter.number}}</button> <button class="button" ng-click="openOptions('bedtype')">{{filter.bedtype}}</button> {{filter.number > 1 ? 'beds' : 'bed'}}</p>
+    
+    <p>up to <button class="button" ng-click="openOptions('pricemax')">{{filter.price.max}}</button> €</p>
+    
+    <p>in a <button class="button" ng-click="openOptions('radius')">{{filter.radius}}</button> Km radius</p>
 
   </ion-content>
 </ion-view>

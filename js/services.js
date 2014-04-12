@@ -25,10 +25,10 @@ angular.module('starter.services', [])
 
       getPromo: function(promoId) {
         return promos.$child(promoId);
-      }
+      },
 
       updateDistances: function() {
-        
+
       }
 
     };
@@ -144,9 +144,11 @@ angular.module('starter.services', [])
     room: 'duplo',
     roomOptions: [],
     price : {
-      max: 9999,
+      max: 30,
       min: 0
-    }
+    }, 
+    number : 1,
+    bedtype: 'single',
   }
 
   return f;

@@ -5,7 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','firebase'])
+DEBUG = true;
+
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','firebase','google-maps'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -33,35 +35,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-      url: '/dash',
+    .state('tab.map', {
+      url: '/map',
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
+        'tab-map': {
+          templateUrl: 'templates/tab-map.html',
+          controller: 'MapCtrl'
         }
       }
     })
-
-    .state('tab.friends', {
-      url: '/friends',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
-        }
-      }
-    })
-
 
     .state('tab.promos', {
       url: '/promos',
@@ -95,30 +77,82 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/promos');
 
 })
 
 .service('Data', function($firebase) {
 
-  var dataUrl = "https://lastminute.firebaseio.com/";
-  var dataRef = new Firebase(dataUrl);
-  var promos = $firebase(dataRef);
-    
-  return {
+  if (!DEBUG) {
+    var dataUrl = "https://lastminute.firebaseio.com/";
+    var dataRef = new Firebase(dataUrl);
+    var promos = $firebase(dataRef);
 
-    getPromos: function() {
-      return promos;
-    },
 
-    getOffer: function(promoId,offerId) {
-      return promos.$child(promoId + '/' + offerId);
-    },
+    return {
 
-    getPromo: function(promoId) {
-      return promos.$child(promoId);
-    }
+      getPromos: function() {
+        return promos;
+      },
 
-  };
+      getOffer: function(promoId,offerId) {
+        return promos.$child(promoId + '/' + offerId);
+      },
+
+      getPromo: function(promoId) {
+        return promos.$child(promoId);
+      }
+
+    };
+  } else {
+
+    var promos = {
+        "2133" : {
+          "offers" : {
+            "-JKGiwDEeUgfLMJfy7Db" : {
+              "price" : "10€",
+              "type" : "room",
+              "room" : "bunk bed",
+              "desc" : "Quarto com vista para a ria de Aveiro 2"
+            },
+            "-JKGb3jLHze_L4EN_-QL" : {
+              "price" : "20€",
+              "discount" : "99%",
+              "room" : "Duplo",
+              "desc" : "Quarto com vista para a praia da barra"
+            },
+            "-JKHZaHmNym_Oeu8fOZQ" : {
+              "price" : "Caro",
+              "discount" : "80 porcento",
+              "type" : "room",
+              "room" : "Duplo",
+              "imgs" : [ "teste" ],
+              "desc" : "Quarto Bonito e Bom"
+            }
+          },
+          "location" : {
+            "latitude" : 41.75373,
+            "longitude" : -8.09017
+          },
+          "name" : "Hotel 1"
+        }
+      }
+
+    return {
+
+      getPromos: function() {
+        return promos;
+      },
+
+      getOffer: function(promoId,offerId) {
+        return promos[promoId][offerId];
+      },
+
+      getPromo: function(promoId) {
+        return promos[promoId];
+      }
+ 
+    };
+  }
 
 })

@@ -125,10 +125,10 @@ angular.module('starter.services', [])
   };
 
   f.offerObeys = function(offer) {
-     var ret = offer.number >= f.number &&
-            offer.bedtype == f.bedtype &&
+     var ret = (offer.number >= f.number &&
+            offer.bedtype === f.bedtype &&
             offer.price >= f.price.min &&
-            offer.price <= f.price.max;
+            offer.price <= f.price.max);
       return ret;
   };
 

@@ -14,7 +14,7 @@ angular.module('starter.controllers', [])
 
 .controller('PromosCtrl', function($scope,$firebase,Map,Data,Filter) {
 
- 
+
   $scope.hotels = Data.getAll();
 
   $scope.myposition = Map.myposition;
@@ -29,8 +29,8 @@ angular.module('starter.controllers', [])
     return Filter.hotelObeys(hotel);
   }
 
-  $scope.offerObeys = function(hotel) {
-    return Filter.hotelObeys(hotel);
+  $scope.offerObeys = function(offer) {
+    return Filter.offerObeys(offer);
   }
 
 })

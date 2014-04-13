@@ -8,14 +8,17 @@
     <ion-list>
       <div ng-repeat="(id,hotel) in hotels" type="item-text-wrap"> 
         <div ng-if="hotelObeys(hotel)">
-          <ion-item ng-if="offerObeys(offer)" ng-repeat="(offerId,offer) in hotel.offers" type="item-text-wrap" href="#/promo/{{id}}/{{offerId}}" class="item-thumbnail-left">
-              <img ng-src="{{hotel.photo}}">
-              <h2>{{offer.desc}}</h2>
-              <p>{{hotel.name}}</p>
-              <p class="list-countdown roundbox">{{getDistanceToHotel(hotel)}} km | {{offer.deadline | timeDiff : t | date : 'hh:mm:ss'}} left</p> <!-- hack -->
-              <p class="list-price roundbox">{{offer.price}}€  ({{offer.discount}})</p>
-            <!-- <p>Expires in ... </p> -->
-          </ion-item>
+          <div ng-repeat="(offerId,offer) in hotel.offers | orderBy : -price">
+
+            <ion-item ng-if="offerObeys(offer)" type="item-text-wrap" href="#/promo/{{id}}/{{offerId}}" class="item-thumbnail-left">
+                <img ng-src="{{hotel.photo}}">
+                <h2>{{offer.desc}}</h2>
+                <p>{{hotel.name}}</p>
+                <p class="list-countdown roundbox">{{getDistanceToHotel(hotel)}} km | {{offer.deadline | timeDiff : t | date : 'hh:mm:ss'}} left</p> <!-- hack -->
+                <p class="list-price roundbox">{{offer.price}}€  ({{offer.discount}})</p>
+              <!-- <p>Expires in ... </p> -->
+            </ion-item>
+          </div>
         </div>
       </div>
     </ion-list>

@@ -4,15 +4,16 @@
     <a class="button button-icon ion-clipboard"></a>
   </ion-nav-buttons>
 
-  <ion-content class="has-header">
+  <ion-content>
     <ion-list>
-      <div ng-repeat="(id,hotel) in promos" type="item-text-wrap"> 
-        <ion-item ng-repeat="(key,offer) in hotel.offers" type="item-text-wrap" href="#/tab/promo/{{id}}" class="item-thumbnail-left">
+      <div ng-repeat="(id,hotel) in hotels" type="item-text-wrap"> 
+        <ion-item ng-repeat="(offerId,offer) in hotel.offers" type="item-text-wrap" href="#/tab/promo/{{id}}/{{offerId}}" class="item-thumbnail-left">
           <img ng-src="{{hotel.photo}}">
           <h2>{{offer.desc}}</h2>
           <p>{{hotel.name}}<br/>
           {{offer.discount}}, {{offer.price}} €
           </p>
+          <!-- <p>Expires in ... </p> -->
         </ion-item>
       </div>
     </ion-list>

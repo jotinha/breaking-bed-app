@@ -12,30 +12,18 @@ angular.module('starter.controllers', [])
 
 .controller('PromosCtrl', function($scope,$firebase,Data) {
 
-  $scope.promos = Data.getPromos();
-
-  $scope.debugme = function() {
-    $scope.hello = 1;
-    console.log("debug");
-  }
-
-  var getNumberOffers = function(promo) {
-    var n = 0;
-    for (var k in promo) {
-      if(promo.hasOwnProperty(k))
-        n += 1;
-    }
-    return n;
-  };
+  $scope.hotels = Data.getData();
 
 })
 
 .controller('PromoDetailCtrl', function($scope, $stateParams, Data) {
-  $scope.promo = Data.getPromo($stateParams.promoId);
+  $scope.hotel = Data.getHotel($stateParams.hotelId)
+  $scope.offer = Data.getOffer($stateParams.hotelId,$stateParams.offerId);
 
 })
 
 .controller('HomeCtrl',function($scope,$ionicModal,Filter) {
+  
   $scope.filter = Filter;
   
   $scope.bedtypeOptions = ['bunk','single','double','twin','triple'];

@@ -10,21 +10,21 @@ angular.module('starter.services', [])
   if (!DEBUG) {
     var dataUrl = "https://lastminute.firebaseio.com/";
     var dataRef = new Firebase(dataUrl);
-    promos = $firebase(dataRef);
+    data = $firebase(dataRef);
 
 
     return {
 
-      getPromos: function() {
-        return promos;
+      getData: function() {
+        return data;
       },
 
-      getOffer: function(promoId,offerId) {
-        return promos.$child(promoId + '/' + offerId);
+      getOffer: function(hotelId,offerId) {
+        return data.$child(hotelId + '/' + offerId);
       },
 
-      getPromo: function(promoId) {
-        return promos.$child(promoId);
+      getHotel: function(hotelId) {
+        return data.$child(hotelId);
       },
 
       updateDistances: function() {
@@ -34,7 +34,7 @@ angular.module('starter.services', [])
     };
   } else {
 
-    promos = {
+    data = {
         "2133" : {
           "offers" : {
             "-JKGiwDEeUgfLMJfy7Db" : {
@@ -68,16 +68,16 @@ angular.module('starter.services', [])
 
     return {
 
-      getPromos: function() {
-        return promos;
+      getData: function() {
+        return data;
       },
 
-      getOffer: function(promoId,offerId) {
-        return promos[promoId][offerId];
+      getOffer: function(hotelId,offerId) {
+        return data[hotelId][offerId];
       },
 
-      getPromo: function(promoId) {
-        return promos[promoId];
+      getHotel: function(hotelId) {
+        return data[hotelId];
       }
  
     };

@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     })
     
     .state('tab.promo-detail', {
-      url: '/promo/:promoId',
+      url: '/promo/:hotelId/:offerId',
       views: {
         'tab-promos': {
           templateUrl: 'templates/promo-detail.html',

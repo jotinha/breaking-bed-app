@@ -18,7 +18,7 @@
           <h1 id="detail-price">{{offer.price}} €</h1><h2 id="detail-discount">({{offer.discount}})</h2>
         </div>
         
-        <h2>Expires in 10 mins</h2>
+        <h2>Time left: {{offer.deadline | timeDiff : t | date : 'hh:mm:ss'}}</h2>
        
       </div>
 

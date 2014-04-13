@@ -1,13 +1,16 @@
 <ion-view title="Map">
-  <ion-nav-buttons side="right">
+<!--   <ion-nav-buttons side="right">
     <a class="button button-icon ion-clipboard" ng-click="centerOnMe()"></a>
-  </ion-nav-buttons>
+  </ion-nav-buttons> -->
 
   <ion-content scroll="false">
       <!-- <div id="map"></div> -->
     <google-map id="map" center="map.center" zoom="map.zoom"
       draggable="true">
-      <marker ng-if="map.myposition" coords="map.myposition"></marker>
+      <marker ng-if="map.myposition" coords="map.myposition" icon="'/img/marker_blue.png'"></marker>
+
+      <marker ng-repeat="(id,hotel) in hotels" coords="hotel.location"> </marker>
+
     </google-map>
 
   </ion-content>

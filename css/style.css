@@ -39,3 +39,36 @@
     font-size: 0.5em;
     
 }
+
+.roundbox {
+  border-radius:.5rem;
+  padding:.3rem;
+  margin:0;
+  font-size:.5rem;
+}
+
+#detail-price {
+  font-size:3.5em;
+  display:inline;
+}
+
+#detail-discount {
+  display: inline;
+  margin-left: 0.5em;
+  font-size: 1.5em;
+}
+
+.list-price {
+  float:left;
+  margin-top: -5px;
+  background:#1a879e;
+  color: white !important;
+ 
+
+}
+
+.list-countdown {
+  float:right;
+  margin-top: -5px;
+  margin-right: -15px;
+}

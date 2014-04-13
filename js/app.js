@@ -9,13 +9,23 @@ DEBUG = false;
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','firebase','google-maps'])
 
-.run(function($ionicPlatform,$ionicLoading,$rootScope) {
+.run(function($ionicPlatform,$ionicLoading,$rootScope,$interval) {
   $ionicPlatform.ready(function() {
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.t0 = new Date();
+  $rootScope.t = new Date();
+  
+  //var dt = 1000;
+  
+  $interval(function() {
+    var date = new Date()
+    $rootScope.t = date.valueOf();
+  },1000);
 
 
 })
@@ -75,8 +85,48 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/promos');
+  $urlRouterProvider.otherwise('/tab/home');
 
 })
 
+.filter('newlines', function () {
+    return function(text) {
+        if (text) {
+          return text.replace(/\n/g, '<br/>');
+        } 
+    }
+})
+.filter('noHTML', function () {
+    return function(text) {
+      if (text) {
+        return text
+                .replace(/&/g, '&amp;')
+                .replace(/>/g, '&gt;')
+                .replace(/</g, '&lt;');
+      }
+    }
+})
 
+.filter('timeDiff', function () {
+    return function(t1,t0) {
+      var d = new Date(t1) - new Date(t0);
+      return d.valueOf();
+    }
+});
+
+//distance between coordinates
+var rad = function(x) {
+  return x * Math.PI / 180;
+};
+
+var getDistanceMeters = function(p1, p2) {
+  var R = 6378137; // Earth’s mean radius in meter
+  var dLat = rad(p2.latitude - p1.latitude);
+  var dLong = rad(p2.longitude - p1.longitude);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) *
+    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c;
+  return d; // returns the distance in meter
+};

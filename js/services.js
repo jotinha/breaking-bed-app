@@ -10,21 +10,21 @@ angular.module('starter.services', [])
   if (!DEBUG) {
     var dataUrl = "https://lastminute.firebaseio.com/";
     var dataRef = new Firebase(dataUrl);
-    promos = $firebase(dataRef);
+    data = $firebase(dataRef);
 
 
     return {
 
-      getPromos: function() {
-        return promos;
+      getAll: function() {
+        return data;
       },
 
       getOffer: function(promoId,offerId) {
-        return promos.$child(promoId + '/' + offerId);
+        return data.$child(promoId + '/offers/' + offerId);
       },
 
-      getPromo: function(promoId) {
-        return promos.$child(promoId);
+      getHotel: function(promoId) {
+        return data.$child(promoId);
       },
 
       updateDistances: function() {
@@ -34,50 +34,20 @@ angular.module('starter.services', [])
     };
   } else {
 
-    promos = {
-        "2133" : {
-          "offers" : {
-            "-JKGiwDEeUgfLMJfy7Db" : {
-              "price" : "10€",
-              "type" : "room",
-              "room" : "bunk bed",
-              "desc" : "Quarto com vista para a ria de Aveiro 2"
-            },
-            "-JKGb3jLHze_L4EN_-QL" : {
-              "price" : "20€",
-              "discount" : "99%",
-              "room" : "Duplo",
-              "desc" : "Quarto com vista para a praia da barra"
-            },
-            "-JKHZaHmNym_Oeu8fOZQ" : {
-              "price" : "Caro",
-              "discount" : "80 porcento",
-              "type" : "room",
-              "room" : "Duplo",
-              "imgs" : [ "teste" ],
-              "desc" : "Quarto Bonito e Bom"
-            }
-          },
-          "location" : {
-            "latitude" : 41.75373,
-            "longitude" : -8.09017
-          },
-          "name" : "Hotel 1"
-        }
-      }
+    data = loadDebug();
 
     return {
 
-      getPromos: function() {
-        return promos;
+      getAll: function() {
+        return data;
       },
 
       getOffer: function(promoId,offerId) {
-        return promos[promoId][offerId];
+        return data[promoId]['offers'][offerId];
       },
 
-      getPromo: function(promoId) {
-        return promos[promoId];
+      getHotel: function(promoId) {
+        return data[promoId];
       }
  
     };
@@ -137,12 +107,10 @@ angular.module('starter.services', [])
     
 })
 
-.service('Filter', function() {
+.service('Filter', function(Map) {
 
   var f = {
     radius: 10,
-    room: 'duplo',
-    roomOptions: [],
     price : {
       max: 30,
       min: 0
@@ -150,6 +118,19 @@ angular.module('starter.services', [])
     number : 1,
     bedtype: 'single',
   }
+
+  f.hotelObeys = function(hotel) {
+      var ret =  (!Map.myposition || !hotel.location || getDistanceMeters(Map.myposition, hotel.location)/1000 <= f.radius);
+      return ret;
+  };
+
+  f.offerObeys = function(offer) {
+     var ret = offer.number >= f.number &&
+            offer.bedtype == f.bedtype &&
+            offer.price >= f.price.min &&
+            offer.price <= f.price.max;
+      return ret;
+  };
 
   return f;
 

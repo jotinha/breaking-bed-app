@@ -1,25 +1,37 @@
 
 <ion-view title="{{offer.desc}}">
-  <ion-content>
+  <ion-content >
     <div class="list card">
 
       <div class="item item-avatar">
-        <img src="mcfly.jpg">
+        <img ng-src="{{hotel.photo}}">
         <h2>{{offer.desc}}</h2>
-        <p>November 05, 1955</p>
+        <p>{{hotel.name}}</p>
       </div>
 
       <div class="item item-body">
-        <img class="full-image" src="delorean.jpg">
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          the content is from a card-body consisting of an image and paragraph text. The footer
-          consists of tabs, icons aligned left, within the card-footer.
-        </p>
-        <p>
-          <a href="#" class="subdued">1 Like</a>
-          <a href="#" class="subdued">5 Comments</a>
-        </p>
+
+        <img class="full-image" src="{{offer.photos[0]}}">
+
+        <!-- <span ca="detail-time-left">Expires in 10 mins</span> -->
+        <div id="detail-price-container">
+          <h1 id="detail-price">{{offer.price}} €</h1><h2 id="detail-discount">({{offer.discount}})</h2>
+        </div>
+        
+        <h2>Expires in 10 mins</h2>
+       
+      </div>
+
+        <div class="item">
+          <p><span ng-repeat="note in notes">{{note}}<br/></span></p>
+          <p> <!-- placeholder -->
+            <!-- <a href="#" class="subdued">{{randomNumber()}} Like</a> -->
+            <!-- <a href="#" class="subdued">{{randomNumber()}} Reviews</a> -->
+          </p>
+        </div>  
+      <div class="item">
+      <a ng-if="offer.contactTel" class="button button-block button-positive"><i class="icon ion-ios7-telephone"></i>&nbsp;&nbsp;{{offer.contactTel}}</a>
+      <a ng-if="offer.contactEmail" class="button button-block button-positive"><i class="icon ion-ios7-email"></i>&nbsp;&nbsp;{{offer.contactEmail}}</a>
       </div>
 
      <!--  <div class="item tabs tabs-secondary tabs-icon-left">

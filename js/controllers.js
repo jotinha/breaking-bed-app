@@ -1,8 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope,Map) {
+.controller('MapCtrl', function($scope,Map,Data) {
 
   $scope.map = Map;
+
+  $scope.hotels = Data.getAll();
 
   $scope.centerOnMe = function() {
     $scope.map.center.latitude = $scope.map.myposition.latitude;
@@ -10,15 +12,46 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('PromosCtrl', function($scope,$firebase,Data) {
+.controller('PromosCtrl', function($scope,$firebase,Map,Data,Filter) {
 
-  $scope.hotels = Data.getData();
+ 
+  $scope.hotels = Data.getAll();
+
+  $scope.myposition = Map.myposition;
+
+  $scope.getDistanceToHotel = function(hotel) {
+    if (hotel.location && Map.myposition) {
+      return Math.round(getDistanceMeters(hotel.location,Map.myposition)/1000);
+    }
+  }
+
+  $scope.hotelObeys = function(hotel) {
+    return Filter.hotelObeys(hotel);
+  }
+
+  $scope.offerObeys = function(hotel) {
+    return Filter.hotelObeys(hotel);
+  }
 
 })
 
 .controller('PromoDetailCtrl', function($scope, $stateParams, Data) {
-  $scope.hotel = Data.getHotel($stateParams.hotelId)
+  
+  $scope.hotel = Data.getHotel($stateParams.hotelId);
   $scope.offer = Data.getOffer($stateParams.hotelId,$stateParams.offerId);
+ 
+
+  $scope.$watch('offer.notes',function() {
+    var notes = $scope.offer.notes[0];
+    if (notes) {
+      $scope.notes = notes.split('\n');
+    }
+
+  })
+
+  $scope.randomNumber = function() {
+    return Math.floor(Math.random()*20)
+  }
 
 })
 
@@ -39,7 +72,7 @@ angular.module('starter.controllers', [])
     $scope.modal.show();
   };
   $scope.closeModal = function() {
-    $scope.modal.hide();
+    if ($scope.modal) $scope.modal.hide();
   };
   $scope.$on('$destroy', function() {
     $scope.modal.remove();

@@ -34,39 +34,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
 
   $stateProvider
 
-    // setup an abstract state for the tabs directive
-    .state('tab', {
-      url: "/tab",
-      abstract: true,
-      templateUrl: "templates/tabs.html"
-    })
-
-    // Each tab has its own nav history stack:
-
-    .state('tab.map', {
+    .state('map', {
       url: '/map',
       views: {
-        'tab-map': {
-          templateUrl: 'templates/tab-map.html',
+        'map': {
+          templateUrl: 'templates/map.html',
           controller: 'MapCtrl'
         }
       }
     })
 
-    .state('tab.promos', {
+    .state('promos', {
       url: '/promos',
       views: {
-        'tab-promos': {
-          templateUrl: 'templates/tab-promos.html',
+        'promos': {
+          templateUrl: 'templates/promos.html',
           controller: 'PromosCtrl',
         }
       }
     })
     
-    .state('tab.promo-detail', {
+    .state('promo-detail', {
       url: '/promo/:hotelId/:offerId',
       views: {
-        'tab-promos': {
+        'promos': {
           templateUrl: 'templates/promo-detail.html',
           controller: 'PromoDetailCtrl'
         }
@@ -74,18 +65,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     })
 
 
-    .state('tab.home', {
+    .state('home', {
       url: '/home',
       views: {
-        'tab-home': {
-          templateUrl: 'templates/tab-home.html',
+        'home': {
+          templateUrl: 'templates/home.html',
           controller: 'HomeCtrl'
         }
       }
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/home');
 
 })
 

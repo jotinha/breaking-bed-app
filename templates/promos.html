@@ -8,7 +8,7 @@
     <ion-list>
       <div ng-repeat="(id,hotel) in hotels" type="item-text-wrap"> 
         <div ng-if="hotelObeys(hotel)">
-          <ion-item ng-if="offerObeys(offer)" ng-repeat="(offerId,offer) in hotel.offers" type="item-text-wrap" href="#/tab/promo/{{id}}/{{offerId}}" class="item-thumbnail-left">
+          <ion-item ng-if="offerObeys(offer)" ng-repeat="(offerId,offer) in hotel.offers" type="item-text-wrap" href="#/promo/{{id}}/{{offerId}}" class="item-thumbnail-left">
               <img ng-src="{{hotel.photo}}">
               <h2>{{offer.desc}}</h2>
               <p>{{hotel.name}}</p>

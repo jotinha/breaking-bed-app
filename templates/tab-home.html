@@ -1,11 +1,15 @@
-<ion-view title="Home">
-  <ion-content class="has-header padding">
+<ion-view title="Home" hide-nav-bar="true">
+
+  <ion-content id="home">
+    
     <p> I'm looking for </p>
-    <p><button class="button" ng-click="openOptions('number')">{{filter.number}}</button> <button class="button" ng-click="openOptions('bedtype')">{{filter.bedtype}}</button> {{filter.number > 1 ? 'beds' : 'bed'}}</p>
+    <p><button class="button button-outline button-calm button-home" ng-click="openOptions('number')">{{filter.number}}</button> <button class="button button-outline button-calm button-home" ng-click="openOptions('bedtype')">{{filter.bedtype}}</button> {{filter.number > 1 ? 'beds' : 'bed'}}</p>
     
-    <p>up to <button class="button" ng-click="openOptions('pricemax')">{{filter.price.max}}</button> €</p>
+    <p>up to <button class="button button-outline button-calm button-home" ng-click="openOptions('pricemax')">{{filter.price.max}}</button> €</p>
     
-    <p>in a <button class="button" ng-click="openOptions('radius')">{{filter.radius}}</button> Km radius</p>
+    <p>in a <button class="button button-outline button-calm button-home" ng-click="openOptions('radius')">{{filter.radius}}</button> Km radius</p>
+
+    <button class="button button-assertive button-large" id="button-go">Go </button> 
 
   </ion-content>
 </ion-view>

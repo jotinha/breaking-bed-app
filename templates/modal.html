@@ -16,37 +16,52 @@
 
       </div>    
 
-      <div class="card" ng-switch-when="radius">
-        <div class="range">
+
+      <div ng-switch-when="number">
+
+        <div class="item range">
+
           <i class="icon ion-volume-low"></i>
-            <input type="range" ng-model="filter.radius" min="1" max="50">
+          <input type="range" ng-model="filter.number" min="1" max="10">
           <i class="icon ion-volume-high"></i>
+          
+          &nbsp;&nbsp;
+          <button class="button button-outline button-dark icon-right ion-checkmark" ng-click="closeModal()">{{filter.number}}</button>          
+
         </div>
-        {{filter.radius}}
-        <button class="button" ng-click="closeModal()">Ok</button>
+ 
       </div>
 
-      <div class="card" ng-switch-when="number">
-        <div class="range">
-          <i class="icon ion-volume-low"></i>
-            <input type="range" ng-model="filter.number" min="1" max="10">
-          <i class="icon ion-volume-high"></i>
-        </div>
-        {{filter.number}}
-        <button class="button" ng-click="closeModal()">Ok</button>
-      </div>
+      <div ng-switch-when="pricemax">
 
-      <div class="card" ng-switch-when="pricemax">
-        <div class="range">
+        <div class="item range">
+
           <i class="icon ion-volume-low"></i>
-            <input type="range" ng-model="filter.price.max" min="0" max="1000">
+          <input type="range" ng-model="filter.price.max" min="0" max="500">
           <i class="icon ion-volume-high"></i>
+          
+          &nbsp;&nbsp;
+          <button class="button button-outline button-dark icon-right ion-checkmark" ng-click="closeModal()">{{filter.price.max}}</button>          
+
         </div>
-        {{filter.price.max}}
-        <button class="button" ng-click="closeModal()">Ok</button>
+ 
       </div>
 
 
+      <div ng-switch-when="radius">
+
+        <div class="item range">
+
+          <i class="icon ion-volume-low"></i>
+          <input type="range" ng-model="filter.radius" min="0" max="50">
+          <i class="icon ion-volume-high"></i>
+          
+          &nbsp;&nbsp;
+          <button class="button button-outline button-dark icon-right ion-checkmark" ng-click="closeModal()">{{filter.radius}}</button>          
+
+        </div>
+ 
+      </div>
     </div>
 
 </div>

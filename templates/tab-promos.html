@@ -6,9 +6,13 @@
 
   <ion-content class="has-header">
     <ion-list>
-      <div ng-repeat="(id,promo) in promos" type="item-text-wrap"> 
-        <ion-item ng-repeat="(key,offer) in promo.offers" type="item-text-wrap" href="#/tab/promo/{{id}}">
-          {{promo.name}}: {{offer.desc}} , {{offer.price}}
+      <div ng-repeat="(id,hotel) in promos" type="item-text-wrap"> 
+        <ion-item ng-repeat="(key,offer) in hotel.offers" type="item-text-wrap" href="#/tab/promo/{{id}}" class="item-thumbnail-left">
+          <img ng-src="{{hotel.photo}}">
+          <h2>{{offer.desc}}</h2>
+          <p>{{hotel.name}}<br/>
+          {{offer.discount}}, {{offer.price}} €
+          </p>
         </ion-item>
       </div>
     </ion-list>
